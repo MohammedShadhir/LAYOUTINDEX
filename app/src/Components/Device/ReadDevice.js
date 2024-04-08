@@ -16,7 +16,7 @@ function ReadDevice() {
 
   const fetchDevices = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/devices");
+      const response = await axios.get(`${process.env.BACKEND_URL}/devices`);
       setDevices(response.data);
     } catch (error) {
       console.error("Error fetching devices:", error);
@@ -27,7 +27,7 @@ function ReadDevice() {
 
   const deleteDevice = async (deviceId) => {
     try {
-      await axios.delete(`http://localhost:4000/devices/${deviceId}`);
+      await axios.delete(`${process.env.BACKEND_URL}/devices/${deviceId}`);
       setDevices(devices.filter((device) => device._id !== deviceId));
     } catch (error) {
       console.error("Error deleting device:", error);

@@ -20,7 +20,9 @@ function EditDevice() {
 
   const fetchDevice = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/devices/${id}`);
+      const response = await axios.get(
+        `${process.env.BACKEND_URL}/devices/${id}`
+      );
       setDevice(response.data);
     } catch (error) {
       console.error("Error fetching device:", error);
@@ -52,7 +54,7 @@ function EditDevice() {
       }
 
       console.log(formData, imageFile, device);
-      await axios.put(`http://localhost:4000/devices/${id}`, formData);
+      await axios.put(`${process.env.BACKEND_URL}/devices/${id}`, formData);
 
       navigate("/device");
     } catch (error) {

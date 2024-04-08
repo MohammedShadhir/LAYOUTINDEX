@@ -29,7 +29,7 @@ function AddDevice() {
     image: "",
   });
 
-  const navigate = useNavigate(); // Get the history object from React Router
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +37,7 @@ function AddDevice() {
       ...device,
       [name]: value,
     });
-    // Clear errors when user starts typing
+
     setErrors({
       ...errors,
       [name]: "",
@@ -54,7 +54,6 @@ function AddDevice() {
     let formIsValid = true;
     const newErrors = { ...errors };
 
-    // Validate name
     if (!device.name) {
       newErrors.name = "Name is required";
       formIsValid = false;
@@ -62,7 +61,6 @@ function AddDevice() {
       newErrors.name = "";
     }
 
-    // Validate serial number
     if (!device.serialNumber) {
       newErrors.serialNumber = "Serial number is required";
       formIsValid = false;
@@ -70,7 +68,6 @@ function AddDevice() {
       newErrors.serialNumber = "";
     }
 
-    // Validate type
     if (!device.type) {
       newErrors.type = "Type is required";
       formIsValid = false;
@@ -78,7 +75,6 @@ function AddDevice() {
       newErrors.type = "";
     }
 
-    // Validate status
     if (!device.status) {
       newErrors.status = "Status is required";
       formIsValid = false;
@@ -86,7 +82,6 @@ function AddDevice() {
       newErrors.status = "";
     }
 
-    // Validate image
     if (!imageFile) {
       newErrors.image = "Image is required";
       formIsValid = false;
@@ -107,7 +102,7 @@ function AddDevice() {
           formData.append("file", imageFile);
         }
         const response = await axios.post(
-          "http://localhost:4000/devices/createdevice",
+          `${process.env.BACKEND_URL}/devices/createdevice`,
           formData,
           {
             headers: {

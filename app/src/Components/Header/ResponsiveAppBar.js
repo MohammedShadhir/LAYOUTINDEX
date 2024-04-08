@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -42,8 +42,8 @@ function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component={Link} // Use Link instead of 'a' tag
-            to="/" // Link to your home route
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -103,8 +103,8 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                component={Link} // Use Link instead of 'a' tag
-                to={"/" + page.toLowerCase()} // Link to respective routes
+                component={Link}
+                to={"/" + page.toLowerCase()}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}

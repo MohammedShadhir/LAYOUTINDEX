@@ -57,7 +57,7 @@ export default function RecipeReviewCard({
       <CardMedia
         component="img"
         height="194"
-        image={`http://localhost:4000/Images/${imageUrl}`}
+        image={`${process.env.BACKEND_URL}Images/${imageUrl}`}
         alt="Device Image"
       />
       <CardContent>
@@ -84,9 +84,7 @@ export default function RecipeReviewCard({
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>{/* Additional content goes here */}</CardContent>
-      </Collapse>
+      <Collapse in={expanded} timeout="auto" unmountOnExit></Collapse>
     </Card>
   );
 }

@@ -21,7 +21,7 @@ function AddLocation() {
   useEffect(() => {
     const fetchDevices = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/devices");
+        const response = await axios.get(`${process.env.BACKEND_URL}/devices`);
         setDevices(response.data);
       } catch (error) {
         console.error("Error fetching devices:", error);
@@ -48,7 +48,10 @@ function AddLocation() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/locations/addlocation", formData);
+      await axios.post(
+        `${process.env.BACKEND_URL}/locations/addlocation`,
+        formData
+      );
       navigate("/location");
     } catch (error) {
       console.error("Error adding location:", error);
@@ -75,7 +78,7 @@ function AddLocation() {
               label="Name"
               variant="outlined"
               fullWidth
-              size="small" // Set size to small
+              size="small"
               value={formData.name}
               onChange={handleChange}
             />
@@ -86,7 +89,7 @@ function AddLocation() {
               label="Address"
               variant="outlined"
               fullWidth
-              size="small" // Set size to small
+              size="small"
               value={formData.address}
               onChange={handleChange}
             />

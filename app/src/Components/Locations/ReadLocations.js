@@ -22,7 +22,7 @@ function ReadLocations() {
 
   const fetchLocations = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/locations");
+      const response = await axios.get(`${process.env.BACKEND_URL}/locations`);
       setLocations(response.data);
     } catch (error) {
       console.error("Error fetching locations:", error);
@@ -31,7 +31,7 @@ function ReadLocations() {
 
   const deleteLocation = async (locationId) => {
     try {
-      await axios.delete(`http://localhost:4000/locations/${locationId}`);
+      await axios.delete(`${process.env.BACKEND_URL}/locations/${locationId}`);
       setLocations(locations.filter((location) => location._id !== locationId));
     } catch (error) {
       console.error("Error deleting location:", error);
@@ -65,7 +65,7 @@ function ReadLocations() {
                 <TableCell>Name</TableCell>
                 <TableCell>Address</TableCell>
                 <TableCell>Phone</TableCell>
-                <TableCell>Devices</TableCell> {/* Added Devices column */}
+                <TableCell>Devices</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
