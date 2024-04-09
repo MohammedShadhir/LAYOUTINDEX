@@ -22,7 +22,9 @@ function ReadLocations() {
 
   const fetchLocations = async () => {
     try {
-      const response = await axios.get(`${process.env.BACKEND_URL}/locations`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/locations`
+      );
       setLocations(response.data);
     } catch (error) {
       console.error("Error fetching locations:", error);
@@ -31,7 +33,9 @@ function ReadLocations() {
 
   const deleteLocation = async (locationId) => {
     try {
-      await axios.delete(`${process.env.BACKEND_URL}/locations/${locationId}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/locations/${locationId}`
+      );
       setLocations(locations.filter((location) => location._id !== locationId));
     } catch (error) {
       console.error("Error deleting location:", error);
@@ -77,7 +81,7 @@ function ReadLocations() {
                   <TableCell>{location.phone}</TableCell>
                   <TableCell>
                     {location.devices.map((device, index) => (
-                      <div key={index}>{device.name}</div>
+                      <div key={index}>{device.serialNumber}</div>
                     ))}
                   </TableCell>
                   <TableCell>

@@ -21,7 +21,7 @@ function EditDevice() {
   const fetchDevice = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_URL}/devices/${id}`
+        `${process.env.REACT_APP_API_URL}/devices/${id}`
       );
       setDevice(response.data);
     } catch (error) {
@@ -54,7 +54,10 @@ function EditDevice() {
       }
 
       console.log(formData, imageFile, device);
-      await axios.put(`${process.env.BACKEND_URL}/devices/${id}`, formData);
+      await axios.put(
+        `${process.env.REACT_APP_API_URL}/devices/${id}`,
+        formData
+      );
 
       navigate("/device");
     } catch (error) {

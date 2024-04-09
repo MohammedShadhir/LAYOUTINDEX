@@ -16,18 +16,20 @@ function ReadDevice() {
 
   const fetchDevices = async () => {
     try {
-      const response = await axios.get(`${process.env.BACKEND_URL}/devices`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/devices`
+      );
       setDevices(response.data);
     } catch (error) {
       console.error("Error fetching devices:", error);
     }
   };
 
-  console.log(devices.image);
-
   const deleteDevice = async (deviceId) => {
     try {
-      await axios.delete(`${process.env.BACKEND_URL}/devices/${deviceId}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/devices/${deviceId}`
+      );
       setDevices(devices.filter((device) => device._id !== deviceId));
     } catch (error) {
       console.error("Error deleting device:", error);

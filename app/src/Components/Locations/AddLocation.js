@@ -21,7 +21,9 @@ function AddLocation() {
   useEffect(() => {
     const fetchDevices = async () => {
       try {
-        const response = await axios.get(`${process.env.BACKEND_URL}/devices`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/devices`
+        );
         setDevices(response.data);
       } catch (error) {
         console.error("Error fetching devices:", error);
@@ -49,7 +51,7 @@ function AddLocation() {
     e.preventDefault();
     try {
       await axios.post(
-        `${process.env.BACKEND_URL}/locations/addlocation`,
+        `${process.env.REACT_APP_API_URL}/locations/addlocation`,
         formData
       );
       navigate("/location");

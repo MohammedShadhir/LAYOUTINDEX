@@ -21,6 +21,7 @@ function AddDevice() {
     status: "",
   });
   const [imageFile, setImageFile] = useState(null);
+
   const [errors, setErrors] = useState({
     name: "",
     serialNumber: "",
@@ -102,7 +103,7 @@ function AddDevice() {
           formData.append("file", imageFile);
         }
         const response = await axios.post(
-          `${process.env.BACKEND_URL}/devices/createdevice`,
+          `${process.env.REACT_APP_API_URL}/devices/createdevice`,
           formData,
           {
             headers: {

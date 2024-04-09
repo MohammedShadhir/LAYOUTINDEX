@@ -57,7 +57,7 @@ export default function RecipeReviewCard({
       <CardMedia
         component="img"
         height="194"
-        image={`${process.env.BACKEND_URL}Images/${imageUrl}`}
+        image={`${process.env.REACT_APP_API_URL}/Images/${imageUrl}`}
         alt="Device Image"
       />
       <CardContent>
