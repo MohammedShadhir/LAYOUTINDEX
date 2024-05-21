@@ -55,7 +55,7 @@ function ReadDevice() {
     console.log("Edit device with ID:", deviceId);
   };
 
-  const { user, loginWithRedirect, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
   if (!isAuthenticated) {
     <Typography>Please login</Typography>;
