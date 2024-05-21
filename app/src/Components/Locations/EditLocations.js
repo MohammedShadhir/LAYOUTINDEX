@@ -6,20 +6,28 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function EditLocation() {
   const { id } = useParams();
   const [location, setLocation] = useState({});
   const [devices, setDevices] = useState([]);
   const navigate = useNavigate();
+  const { getAccessTokenSilently } = useAuth0();
 
   console.log(location.devices);
 
   useEffect(() => {
     const fetchLocation = async () => {
       try {
+        const token = await getAccessTokenSilently();
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/locations/${id}`
+          `${process.env.REACT_APP_API_URL}/locations/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setLocation(response.data);
       } catch (error) {
@@ -29,8 +37,14 @@ function EditLocation() {
 
     const fetchDevices = async () => {
       try {
+        const token = await getAccessTokenSilently();
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/devices`
+          `${process.env.REACT_APP_API_URL}/devices`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setDevices(response.data);
       } catch (error) {

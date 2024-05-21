@@ -17,19 +17,17 @@ function App() {
   console.log("app console", backendUrl);
 
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/location" element={<Locations />} />
-          <Route path="/addlocation" element={<AddLocation />} />
-          <Route path="/device" element={<Device />} />
-          <Route path="/adddevice" element={<AddDevice />} />
-          <Route path="/editdevice/:id" element={<EditDevice />} />
-          <Route path="/editlocation/:id" element={<EditLocation />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/location" element={<Locations />} />
+        <Route path="/addlocation" element={<AddLocation />} />
+        <Route path="/device" element={<Device />} />
+        <Route path="/adddevice" element={<AddDevice />} />
+        <Route path="/editdevice/:id" element={<EditDevice />} />
+        <Route path="/editlocation/:id" element={<EditLocation />} />
+      </Routes>
+    </Layout>
   );
 }
 

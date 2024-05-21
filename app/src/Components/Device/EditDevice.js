@@ -6,12 +6,14 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function EditDevice() {
   const { id } = useParams();
   const [device, setDevice] = useState({});
   const [imageFile, setImageFile] = useState(null);
   const navigate = useNavigate();
+  const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     fetchDevice();
@@ -20,8 +22,14 @@ function EditDevice() {
 
   const fetchDevice = async () => {
     try {
+      const token = await getAccessTokenSilently();
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/devices/${id}`
+        `${process.env.REACT_APP_API_URL}/devices/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDevice(response.data);
     } catch (error) {

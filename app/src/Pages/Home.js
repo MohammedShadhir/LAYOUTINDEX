@@ -1,8 +1,17 @@
 import React from "react";
 import { Typography, Button, Grid, Box } from "@mui/material";
-import { Link } from "react-router-dom"; // Import Link component from React Router
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
+  const { user, isAuthenticated } = useAuth0();
+
+  if (!isAuthenticated) {
+    return (
+      <Typography variant="h6">Please log in to see your profile.</Typography>
+    );
+  }
+
   return (
     <Box
       sx={{

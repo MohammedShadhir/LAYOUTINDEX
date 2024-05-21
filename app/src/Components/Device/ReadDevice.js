@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import RecipeReviewCard from "./Card";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function ReadDevice() {
+  const { getAccessTokenSilently } = useAuth0();
   const [devices, setDevices] = useState([]);
   const navigate = useNavigate();
 
@@ -16,8 +18,14 @@ function ReadDevice() {
 
   const fetchDevices = async () => {
     try {
+      const token = await getAccessTokenSilently();
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/devices`
+        `${process.env.REACT_APP_API_URL}/devices`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDevices(response.data);
     } catch (error) {
@@ -27,18 +35,31 @@ function ReadDevice() {
 
   const deleteDevice = async (deviceId) => {
     try {
+      const token = await getAccessTokenSilently();
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/devices/${deviceId}`
+        `${process.env.REACT_APP_API_URL}/devices/${deviceId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDevices(devices.filter((device) => device._id !== deviceId));
     } catch (error) {
       console.error("Error deleting device:", error);
     }
   };
+
   const editDevice = (deviceId) => {
     navigate(`/editdevice/${deviceId}`);
     console.log("Edit device with ID:", deviceId);
   };
+
+  const { user, loginWithRedirect, isAuthenticated } = useAuth0();
+
+  if (!isAuthenticated) {
+    <Typography>Please login</Typography>;
+  }
 
   return (
     <Box sx={{ width: "100%" }}>

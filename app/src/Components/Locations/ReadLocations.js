@@ -12,9 +12,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function ReadLocations() {
   const [locations, setLocations] = useState([]);
+  const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     fetchLocations();
@@ -22,8 +24,14 @@ function ReadLocations() {
 
   const fetchLocations = async () => {
     try {
+      const token = await getAccessTokenSilently();
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/locations`
+        `${process.env.REACT_APP_API_URL}/locations`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setLocations(response.data);
     } catch (error) {
@@ -32,9 +40,15 @@ function ReadLocations() {
   };
 
   const deleteLocation = async (locationId) => {
+    const token = await getAccessTokenSilently();
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/locations/${locationId}`
+        `${process.env.REACT_APP_API_URL}/locations/${locationId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setLocations(locations.filter((location) => location._id !== locationId));
     } catch (error) {

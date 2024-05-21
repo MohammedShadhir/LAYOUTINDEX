@@ -11,8 +11,10 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import FormHelperText from "@mui/material/FormHelperText";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function AddDevice() {
+  const { getAccessTokenSilently } = useAuth0();
   const [device, setDevice] = useState({
     name: "",
     serialNumber: "",
@@ -95,6 +97,7 @@ function AddDevice() {
     if (formIsValid) {
       try {
         const formData = new FormData();
+        const token = await getAccessTokenSilently();
         formData.append("name", device.name);
         formData.append("serialNumber", device.serialNumber);
         formData.append("type", device.type);
@@ -108,6 +111,7 @@ function AddDevice() {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
             },
           }
         );
