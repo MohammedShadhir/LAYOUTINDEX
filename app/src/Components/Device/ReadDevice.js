@@ -14,6 +14,7 @@ function ReadDevice() {
 
   useEffect(() => {
     fetchDevices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchDevices = async () => {
