@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 import RecipeReviewCard from "./Card";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import getAccessToken from "../../utils/getAccessToken";
 
 function ReadDevice() {
   const { getAccessTokenSilently } = useAuth0();
@@ -19,7 +20,9 @@ function ReadDevice() {
 
   const fetchDevices = async () => {
     try {
-      const token = await getAccessTokenSilently();
+      const token = await getAccessToken();
+      console.log("token", token);
+
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/devices`,
         {
