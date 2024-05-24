@@ -6,7 +6,6 @@ import { Box, Typography } from "@mui/material";
 import RecipeReviewCard from "./Card";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import getAccessToken from "../../utils/getAccessToken";
 
 function ReadDevice() {
   const { getAccessTokenSilently } = useAuth0();
