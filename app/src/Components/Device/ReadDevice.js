@@ -20,7 +20,9 @@ function ReadDevice() {
 
   const fetchDevices = async () => {
     try {
-      const token = await getAccessToken();
+      const token = await getAccessTokenSilently({
+        audience: "this is layout index identifier",
+      });
       console.log("token", token);
 
       const response = await axios.get(
