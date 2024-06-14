@@ -13,7 +13,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "crypto-browserify": "^3.12.0",
     "dotenv": "^16.4.5",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -49,10 +52,7 @@
     ]
   },
   "devDependencies": {
-    "crypto-browserify": "^3.12.0",
     "node-polyfill-webpack-plugin": "^3.0.0",
-    "os-browserify": "^0.3.0",
-    "path-browserify": "^1.0.1",
     "react-app-rewired": "^2.2.1"
   }
 }
